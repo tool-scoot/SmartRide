@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<title>Page 2</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/extras.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/smartride.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="saferide.js"></script>
+
+<body onload = "setUp()">
+    <div id = "screen">
+        <a href='index.html'><i id="back" class="fa fa-arrow-circle-left"></i></a>
+        <a href='/page2.html'><i id="settings2" class="glyphicon glyphicon-tasks"></i></a>
+        <a href='/page4.html'><i id="scroll_down" class="fa fa-chevron-circle-down"></i></a>
+        
+        <p class="title"> SmartRide </p>
+        <hr id="divisor">
+        
+      
+          <div class="transport" id = "option1">
+            <p>Uber</p>
+            <article id="uberinfo" data-eta="15" data-price="50">
+            </article>
+              <img class="logo" src="images/uber logo.png">
+          </div>
+
+          <div class="transport" id = "option2">
+              <p>Lyft</p>
+              <article id="lyftinfo" data-eta="25" data-price="40">
+                </article>
+              <img class="logo" src="images/lyft logo.png">
+          </div>
+    
+      
+    </div>
+</body>
+<script>
+  function setUp(){
+    if (!(JSON.parse(localStorage.getItem('Transport1'))))
+      document.getElementById("option1").style.visibility = "hidden";
+      if (!(JSON.parse(localStorage.getItem('Transport2'))))
+      document.getElementById("option2").style.visibility = "hidden";
+  }
+
+</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<title>Page 2</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/extras.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/smartride.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<body onload="setUp()">
+    <div id="screen">
+        <a href='index.html'><i id="back" class="fa fa-arrow-circle-left"></i></a>
+        <a href='/page2.html'><i id="settings2" class="glyphicon glyphicon-tasks"></i></a>
+        <a href='/page3.html'><i id="scroll_up" class="fa fa-chevron-circle-up"></i></a>
+
+        <p class="title"> SmartRide </p>
+        <hr id="divisor">
+
+        <div class="transport" id = "option3">
+            <p>SafeRide</p>
+            <article id="saferideinfo" data-eta="30" data-price="0">
+                </article>
+            <img class="logo" src="images/saferide  logo.jpg">
+        </div>
+
+        <div class="transport" id = "option4">
+            <p>CTA</p>
+            <article id="ctainfo" data-eta="5" data-price="20">
+                </article>
+            <img class="logo" src="images/cta logo.png">
+        </div>
+    </div>
+
+
+</body>
+<script>
+  function setUp(){
+    if (!(JSON.parse(localStorage.getItem('Transport3'))))
+      document.getElementById("option3").style.visibility = "hidden";
+      if (!(JSON.parse(localStorage.getItem('Transport4'))))
+      document.getElementById("option4").style.visibility = "hidden";
+  }
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/smartride.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+<body>
+  <div id = "screen">
+
+    <!-- all body code goes in here, head code goes in existing header section -->
+    <img id="googlemaps" src="images/map1.jpg"> <!-- still image for google maps -->
+    <a href='/page2.html'><i id="settings" class="glyphicon glyphicon-tasks"></i></a> <!-- this is the three bars icon for the options slide ba, we need to do an href-->
+
+    <form id = "fromto">
+        <p>
+          <label>From: </label>
+          <input type="text" id="from" value = " ">
+        </p>
+        <p>
+          <label>To: </label>
+          <input type="text" id="to" value = " ">
+        </p>
+    </form>
+    <a href='page3.html'> <button id = "go" onclick="goButton()">Go!</button> </a>
+
+
+
+
+    <script>
+       function goButton(){
+          let whereFrom = document.getElementById("from").value;
+          let whereTo = document.getElementById("to").value;
+          localStorage.setItem("from", whereFrom);
+          localStore.setItem("to", whereTo)
+          //plug whereFrom and whereTo into the google map widget
+       } 
+    </script>
+  </div>
+</body>
+</html>
