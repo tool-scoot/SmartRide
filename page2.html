@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page 2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/w3.css">
+  <link rel="stylesheet" href="css/extras.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/smartride.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="saferide.js"></script>
+</head>
+<body onload = "setInterval(updateTime(), 1000), loadChecked()">
+    <div id = "screen">
+      <a href='index.html'><i id="back" class="fa fa-arrow-circle-left"></i></a>
+      
+      <p class="title">Settings</p>
+      <hr id = "divisor">
+      <p id = "time">00:00</p>
+      <hr id = "divisor">
+     
+      <div id="settings_text">
+        <p>Choose what is shown</p>
+        <div class="transport_options">
+          Uber <input type="checkbox" checked="true" id="Transport1" value="Uber"><br>
+          Lyft <input type="checkbox" checked="true" id="Transport2" value="Lyft"><br>
+          SafeRide <input type="checkbox" checked="true" id="Transport3" value="SafeRide"><br>
+          CTA <input type="checkbox" checked="true" id="Transport4" value="CTA"><br>
+          <button id="update" onclick="updateChecked()">Update</button>
+      </div>
+
+      <div id="display_options">
+        <p>Display Order</p>
+          <select id="select" name="display_order">
+            <option value="By Price">By Price</option>
+            <option value="By ETA">By ETA</option>
+          </select>
+      </div>
+    </div>
+  </body>
+
+<script>
+
+function updateChecked() {
+  let checkbox = [];
+  for (let i = 1; i < 5; i++){
+    checkbox[i-1] = document.getElementById('Transport'+i);
+    localStorage.setItem('Transport'+i, checkbox[i-1].checked);
+    console.log(JSON.parse(localStorage.getItem('Transport'+i)));
+  }
+}
+
+function loadChecked() {
+  let checked = [];
+  for (let i = 1; i < 5; i++){
+    checked[i-1] = JSON.parse(localStorage.getItem('Transport'+i));
+    document.getElementById('Transport'+i).checked = checked[i-1];
+  }
+}
+
+for (let i = 1; i < 5; i++){
+  console.log(localStorage.getItem('Transport'+i));
+}
+
+function updateTime(){
+  let theTime = new Date();
+  let hours = theTime.getHours();
+  let minutes = theTime.getMinutes();
+  let ampm = "am";
+  if (minutes < 10)
+    minutes = "0" + minutes;
+  if (hours > 12){
+    hours = hours - 12;
+    ampm = "pm";
+  }
+  if (hours == 0)
+    hours = 12;
+  let currTime = hours + ":" + minutes + ampm;
+  document.getElementById("time").innerHTML = currTime;
+}
+
+  
+
+</script>
+</html>
