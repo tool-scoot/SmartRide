@@ -12,27 +12,42 @@
 <script src="saferide.js"></script>
 
 <body onload = "setUp()">
-    <div id = "screen">
-        <a href='index.html'><i id="back" class="fa fa-arrow-circle-left"></i></a>
-        <a href='page2.html'><i id="settings2" class="glyphicon glyphicon-tasks"></i></a>
-        <a href='page4.html'><i id="scroll_down" class="fa fa-chevron-circle-down"></i></a>
-        
-        <p class="title"> SmartRide </p>
+    <div id = "ridescreen" style="overflow: auto; height: 900px">
+        <div class = "head">
+          <p class="title"> Ride </p>
+          <a href='index.html'><i id="close" class="fa fa-arrow-circle-left"></i></a>
+        </div>
         <hr id="divisor">
         
-      
+        <!--<a href='/page2.html'><i id="settings2" class="glyphicon glyphicon-tasks"></i></a>
+        <a href='/page4.html'><i id="scroll_down" class="fa fa-chevron-circle-down"></i></a>-->
+        
           <div class="transport" id = "option1">
             <p>Uber</p>
             <article id="uberinfo" data-eta="15" data-price="50">
             </article>
-              <img class="logo" src="project_5_files/images/uber logo.png">
+              <img class="logo" src="/images/uber logo.png">
           </div>
 
           <div class="transport" id = "option2">
               <p>Lyft</p>
               <article id="lyftinfo" data-eta="25" data-price="40">
                 </article>
-              <img class="logo" src="project_5_files/images/lyft logo.png">
+              <img class="logo" src="/images/lyft logo.png">
+          </div>
+
+          <div class="transport" id = "option3">
+            <p>SafeRide</p>
+            <article id="saferideinfo" data-eta="30" data-price="0">
+                </article>
+            <img class="logo" src="/images/saferide  logo.jpg">
+          </div>
+
+          <div class="transport" id = "option4">
+              <p>CTA</p>
+              <article id="ctainfo" data-eta="5" data-price="20">
+                  </article>
+              <img class="logo" src="/images/cta logo.png">
           </div>
     
       
@@ -40,10 +55,105 @@
 </body>
 <script>
   function setUp(){
+    //set up the display order
+    let lyfteta = document.getElementById("lyftinfo").getAttribute("data-eta");
+    let lyftprice = document.getElementById("lyftinfo").getAttribute("data-price");
+    let ubereta = document.getElementById("uberinfo").getAttribute("data-eta");
+    let uberprice = document.getElementById("uberinfo").getAttribute("data-price");
+    let sreta = document.getElementById("saferideinfo").getAttribute("data-eta");
+    let srprice = document.getElementById("saferideinfo").getAttribute("data-price");
+    let ctaeta = document.getElementById("ctainfo").getAttribute("data-eta");
+    let ctaprice = document.getElementById("ctainfo").getAttribute("data-price");
+    let sortBy = localStorage.getItem('sortBy');
+    if (sortBy == "By ETA"){
+      let etas = [lyfteta, ubereta, sreta, ctaeta];
+      etas.sort(function(a, b){return a-b});
+      console.log(etas);
+      for (let i = 0; i < etas.length; i++){
+        if (etas[i] == ubereta){
+          document.getElementById("option"+(i+1)).innerHTML = 
+          `<p id = "ridetitle"><a id = "travellink" href="">Uber</a></p>
+            <article id="uberinfo" data-eta="15" data-price="50">
+            </article>
+            <a href = ""><img class="logo" src="/images/uber logo.png"></a>
+              <p id = "rideinfo">ETA: 15 min || Price: $50.00</p>`
+        }
+        else if (etas[i] == lyfteta){
+          document.getElementById("option"+(i+1)).innerHTML = 
+              `<p id = "ridetitle"><a id = "travellink" href="">Lyft</a></p>
+              <article id="lyftinfo" data-eta="25" data-price="40">
+                </article>
+                <a href = ""><img class="logo" src="/images/lyft logo.png"></a>
+              <p id = "rideinfo">ETA: 25 min || Price: $40.00</p>`;
+        }
+        else if (etas[i] == sreta){
+          document.getElementById("option"+(i+1)).innerHTML =
+          `<p id = "ridetitle"><a id = "travellink" href="">SafeRide</a></p>
+            <article id="saferideinfo" data-eta="30" data-price="0">
+                </article>
+                <a href = ""><img class="logo" src="/images/saferide  logo.jpg"></a>
+            <p id = "rideinfo">ETA: 30 min || Price: $0.00</p>`
+        }
+        else if (etas[i] == ctaeta){
+          document.getElementById("option"+(i+1)).innerHTML =
+          `<p id = "ridetitle"><a id = "travellink" href="">CTA</a></p>
+              <article id="ctainfo" data-eta="5" data-price="20">
+                  </article>
+                  <a href = ""><img class="logo" src="/images/cta logo.png"></a>
+              <p id = "rideinfo">ETA: 5 min || Price: $20.00</p>`
+        }
+      }
+    }
+    else if (sortBy == "By Price"){
+      let prices = [lyftprice, uberprice, srprice, ctaprice];
+      prices.sort(function(a, b){return a-b});
+      console.log(prices);
+      for (let i = 0; i < prices.length; i++){
+        if (prices[i] == uberprice){
+          document.getElementById("option"+(i+1)).innerHTML = 
+          `<p><a id = "travellink" href="">Uber</a></p>
+            <article id="uberinfo" data-eta="15" data-price="50">
+            </article>
+            <a href = ""><img class="logo" src="/images/uber logo.png"></a>
+            <p id = "rideinfo">Price: $50.00 || ETA: 15 min</p>`
+        }
+        else if (prices[i] == lyftprice){
+          document.getElementById("option"+(i+1)).innerHTML = 
+              `<p><a id = "travellink" href="">Lyft</a></p>
+              <article id="lyftinfo" data-eta="25" data-price="40">
+                </article>
+                <a href = ""><img class="logo" src="/images/lyft logo.png"></a>
+                <p id = "rideinfo">Price: $40.00 || ETA: 25 min</p>`;
+        }
+        else if (prices[i] == srprice){
+          document.getElementById("option"+(i+1)).innerHTML =
+          `<p><a id = "travellink" href="">SafeRide</a></p>
+            <article id="saferideinfo" data-eta="30" data-price="0">
+                </article>
+                <a href = ""><img class="logo" src="/images/saferide  logo.jpg"></a>
+                <p id = "rideinfo">Price: $0.00 || ETA: 30 min</p>`
+        }
+        else if (prices[i] == ctaprice){
+          document.getElementById("option"+(i+1)).innerHTML =
+          `<p><a id = "travellink" href="">CTA</a></p>
+              <article id="ctainfo" data-eta="5" data-price="20">
+                  </article>
+            <a href = ""><img class="logo" src="/images/cta logo.png"></a>
+            <p id = "rideinfo">Price: $20.00 || ETA: 5 min</p>`
+        }
+      }
+    }
+    else;
+
+    //set up the visibility
     if (!(JSON.parse(localStorage.getItem('Transport1'))))
-      document.getElementById("option1").style.visibility = "hidden";
-      if (!(JSON.parse(localStorage.getItem('Transport2'))))
-      document.getElementById("option2").style.visibility = "hidden";
+      document.getElementById("option1").style.display = "none";
+    if (!(JSON.parse(localStorage.getItem('Transport2'))))
+      document.getElementById("option2").style.display = "none";
+    if (!(JSON.parse(localStorage.getItem('Transport3'))))
+      document.getElementById("option3").style.display = "none";
+    if (!(JSON.parse(localStorage.getItem('Transport4'))))
+      document.getElementById("option4").style.display = "none";
   }
 
 </script>

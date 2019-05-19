@@ -10,22 +10,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
-<body>
-  <div id = "screen">
+<body id = "screen" style="overflow: hidden">
 
     <!-- all body code goes in here, head code goes in existing header section -->
-    <img id="googlemaps" src="images/map1.jpg"> <!-- still image for google maps -->
-    <a href='page2.html'><i id="settings" class="glyphicon glyphicon-tasks"></i></a> <!-- this is the three bars icon for the options slide ba, we need to do an href-->
+    <img id="googlemaps" src="/images/map1.jpg"> <!-- still image for google maps -->
+    <a href='/page2.html'><i id="settings" class="glyphicon glyphicon-tasks"></i></a> <!-- this is the three bars icon for the options slide ba, we need to do an href-->
 
     <form id = "fromto">
-        <p>
-          <label>From: </label>
-          <input type="text" id="from" value = " ">
-        </p>
-        <p>
-          <label>To: </label>
-          <input type="text" id="to" value = " ">
-        </p>
+          <input type="text" id="from" placeholder = "From"> <br>
+          <input type="text" id="to" placeholder = "To">
     </form>
     <a href='page3.html'> <button id = "go" onclick="goButton()">Go!</button> </a>
 
@@ -41,6 +34,5 @@
           //plug whereFrom and whereTo into the google map widget
        } 
     </script>
-  </div>
 </body>
 </html>
