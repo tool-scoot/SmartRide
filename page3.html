@@ -64,6 +64,10 @@
     let srprice = document.getElementById("saferideinfo").getAttribute("data-price");
     let ctaeta = document.getElementById("ctainfo").getAttribute("data-eta");
     let ctaprice = document.getElementById("ctainfo").getAttribute("data-price");
+    let uberstoredin = 0;
+    let lyftstoredin = 0;
+    let srstoredin = 0;
+    let ctastoredin = 0;
     let sortBy = localStorage.getItem('sortBy');
     if (sortBy == "By ETA"){
       let etas = [lyfteta, ubereta, sreta, ctaeta];
@@ -76,7 +80,8 @@
             <article id="uberinfo" data-eta="15" data-price="50">
             </article>
             <a href = ""><img class="logo" src="/images/uber logo.png"></a>
-              <p id = "rideinfo">ETA: 15 min || Price: $50.00</p>`
+              <p id = "rideinfo">ETA: 15 min || Price: $50.00</p>`;
+          uberstoredin = i;
         }
         else if (etas[i] == lyfteta){
           document.getElementById("option"+(i+1)).innerHTML = 
@@ -85,6 +90,7 @@
                 </article>
                 <a href = ""><img class="logo" src="/images/lyft logo.png"></a>
               <p id = "rideinfo">ETA: 25 min || Price: $40.00</p>`;
+          lyftstoredin = i;
         }
         else if (etas[i] == sreta){
           document.getElementById("option"+(i+1)).innerHTML =
@@ -92,7 +98,8 @@
             <article id="saferideinfo" data-eta="30" data-price="0">
                 </article>
                 <a href = ""><img class="logo" src="/images/saferide  logo.jpg"></a>
-            <p id = "rideinfo">ETA: 30 min || Price: $0.00</p>`
+            <p id = "rideinfo">ETA: 30 min || Price: $0.00</p>`;
+          srstoredin = i;
         }
         else if (etas[i] == ctaeta){
           document.getElementById("option"+(i+1)).innerHTML =
@@ -100,7 +107,8 @@
               <article id="ctainfo" data-eta="5" data-price="20">
                   </article>
                   <a href = ""><img class="logo" src="/images/cta logo.png"></a>
-              <p id = "rideinfo">ETA: 5 min || Price: $20.00</p>`
+              <p id = "rideinfo">ETA: 5 min || Price: $20.00</p>`;
+          ctastoredin = i;
         }
       }
     }
@@ -115,7 +123,8 @@
             <article id="uberinfo" data-eta="15" data-price="50">
             </article>
             <a href = ""><img class="logo" src="/images/uber logo.png"></a>
-            <p id = "rideinfo">Price: $50.00 || ETA: 15 min</p>`
+            <p id = "rideinfo">Price: $50.00 || ETA: 15 min</p>`;
+          uberstoredin = i;
         }
         else if (prices[i] == lyftprice){
           document.getElementById("option"+(i+1)).innerHTML = 
@@ -124,6 +133,7 @@
                 </article>
                 <a href = ""><img class="logo" src="/images/lyft logo.png"></a>
                 <p id = "rideinfo">Price: $40.00 || ETA: 25 min</p>`;
+          lyftstoredin = i;
         }
         else if (prices[i] == srprice){
           document.getElementById("option"+(i+1)).innerHTML =
@@ -131,7 +141,8 @@
             <article id="saferideinfo" data-eta="30" data-price="0">
                 </article>
                 <a href = ""><img class="logo" src="/images/saferide  logo.jpg"></a>
-                <p id = "rideinfo">Price: $0.00 || ETA: 30 min</p>`
+                <p id = "rideinfo">Price: $0.00 || ETA: 30 min</p>`;
+          srstoredin = i;
         }
         else if (prices[i] == ctaprice){
           document.getElementById("option"+(i+1)).innerHTML =
@@ -139,7 +150,8 @@
               <article id="ctainfo" data-eta="5" data-price="20">
                   </article>
             <a href = ""><img class="logo" src="/images/cta logo.png"></a>
-            <p id = "rideinfo">Price: $20.00 || ETA: 5 min</p>`
+            <p id = "rideinfo">Price: $20.00 || ETA: 5 min</p>`;
+          ctastoredin = i;
         }
       }
     }
@@ -147,13 +159,13 @@
 
     //set up the visibility
     if (!(JSON.parse(localStorage.getItem('Transport1'))))
-      document.getElementById("option1").style.display = "none";
+      document.getElementById("option"+(uberstoredin+1)).style.display = "none";
     if (!(JSON.parse(localStorage.getItem('Transport2'))))
-      document.getElementById("option2").style.display = "none";
+      document.getElementById("option"+(lyftstoredin+1)).style.display = "none";
     if (!(JSON.parse(localStorage.getItem('Transport3'))))
-      document.getElementById("option3").style.display = "none";
+      document.getElementById("option"+(srstoredin+1)).style.display = "none";
     if (!(JSON.parse(localStorage.getItem('Transport4'))))
-      document.getElementById("option4").style.display = "none";
+      document.getElementById("option"+(ctastoredin+1)).style.display = "none";
   }
 
 </script>
