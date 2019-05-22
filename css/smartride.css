@@ -2,6 +2,10 @@ body {
 	font-family: Arial, sans-serif;
 }
 
+input[type=checkbox]{
+	zoom: 1.5;
+}
+
 #settings {
 	font-size: 23pt;
     position: relative;
