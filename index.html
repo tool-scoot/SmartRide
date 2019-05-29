@@ -8,31 +8,35 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/smartride.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <body id = "screen" style="overflow: hidden">
 
     <!-- all body code goes in here, head code goes in existing header section -->
-    <img id="googlemaps" src="images/map1.jpg"> <!-- still image for google maps -->
-    <a href='page2.html'><i id="settings" class="glyphicon glyphicon-tasks"></i></a> <!-- this is the three bars icon for the options slide ba, we need to do an href-->
-
+    <!-- <img id="googlemaps" src="/images/map1.jpg"> still image for google maps -->
+    <!--embedded map --><iframe id = "googlemaps" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9439.856904980787!2d-87.67675634290022!3d42.05502653225484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1558984077572!5m2!1sen!2sus" width="400" height="670" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <a onclick="saveLastPage()" href='page2.html'><i id="settings" class="fa fa-cog"></i></a>
     <form id = "fromto">
           <input type="text" id="from" placeholder = "From"> <br>
           <input type="text" id="to" placeholder = "To">
     </form>
-    <a href='page3.html'> <button id = "go" onclick="goButton()">Go!</button> </a>
-
-
-
+    <a id = "gobutton" href='page3.html'> <button id = "go" onclick="goButton()">Go!</button> </a>
 
     <script>
        function goButton(){
           let whereFrom = document.getElementById("from").value;
           let whereTo = document.getElementById("to").value;
           localStorage.setItem("from", whereFrom);
-          localStore.setItem("to", whereTo)
+          localStorage.setItem("to", whereTo);
+          if (localStorage.getItem("from") == "" || localStorage.getItem("to") == ""){
+            $("#gobutton").attr("href", "index.html");
+            alert("Please enter the required information.");
+          }
           //plug whereFrom and whereTo into the google map widget
        } 
+       function saveLastPage(){
+          localStorage.setItem("cameFrom", "index.html");
+       }
     </script>
 </body>
 </html>

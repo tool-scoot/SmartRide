@@ -2,24 +2,29 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-input[type=checkbox]{
-	zoom: 1.5;
+#settings {
+	font-size: 38pt;
+    position: relative;
+	left: 315px;
+	top: -670px;
+	color: #800080;
+	z-index: 10;
 }
 
-#settings {
-	font-size: 23pt;
-    position: relative;
-	left: 23px;
-	top: -1290px;
-    color: purple;
+#googlemaps {
+	overflow: hidden;
+	/* z-index: -3; */ 
 }
 
 #settings2 {
-	font-size: 80px;
+	font-size: 38pt;
     position: relative;
-	left: 250px;
-	top: -300px;
-    color: purple;
+	left: 320px;
+	top: -700px;
+	color: purple;
+	z-index: 11;
+	width: 45px;
+	height: 51px;
 }
 	
 #close {
@@ -30,6 +35,41 @@ input[type=checkbox]{
 	left: 20px;
 }
 
+#home{
+	font-size: 38pt;
+    position: relative;
+	left: 270px;
+	top: -652px;
+	color: purple;
+	z-index: 11;
+}
+
+input[type=checkbox]{
+	zoom: 1.5;
+}
+
+#rideheader{
+	position: relative;
+}
+
+#rideinfo{
+	color: white;
+}
+
+#rideicons {
+	/*background-color: #BE90D4;*/
+	background-color: rgb(194, 189, 189);
+    position: relative;
+    bottom: 105px;
+	overflow: hidden;
+	width: 100%;
+}
+
+.logo{
+	width: 300px;
+	height: 120px;
+}
+
 #back {
     font-size: 35px;
     position: relative;
@@ -37,40 +77,42 @@ input[type=checkbox]{
 	color: purple;
 }
 
-#go{
+#go {
     position: relative;
-	bottom: 1430px;
-	left: 300px;
+    bottom: 767px;
+    left: 250px;
     font-weight: bold;
-	background-color: purple;
-	color: white;
-	border: 1px solid black;
-	width: 60px;
-	height: 62px;
-	font-size: 12pt;
+    background-color: purple;
+    color: white;
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    font-size: 12pt;
 }
 
 #fromto{
 	font-size: 12pt;
     position: relative;
-	bottom: 1368px;
-	left: 70px;
-	color: purple;
+	bottom: 710px;
+	left: 50px;
+	color: black;
 	margin-top: 20px;
 }
 
 #to {
     margin-top: 10px;
-    padding-right: 30px;
     border: 1px solid black;
-    font-style: italic;
+	font-style: italic;
+	padding-left: 3px;
+	padding-right: 3px;
 }
 
 #from{
 	margin-top: 10px;
 	border: 1px solid black;
-    padding-right: 30px;
 	font-style: italic;
+	padding-right: 3px;
+	padding-left: 3px;
 }
 
 .head {
@@ -122,15 +164,29 @@ input[type=checkbox]{
 	left: 55px;
 } 
 
-.logo {
+img.logo {
     width: 200px;
-    height: 150px;
+    height: 200px;
 }
 
 #time{
 	font-size: 20pt;
 	position: relative;
 	left: 105px;
+}
+
+#break{
+	width: 130px;
+	position: relative;
+	left: 120px;
+	bottom: 50px;
+	font-weight: bold;
+	border-color: purple;
+	border-width: 2px;
+}
+
+.transport{
+	height: 30px;
 }
 
 #settings_text {
@@ -173,10 +229,11 @@ input[type=checkbox]{
 }
 
 #ridetitle{
-	color: purple;
+	color: white;
 	font-size: 25pt;
 }
 
 #travellink{
 	color: purple;
+	font-size: 30px;
 }
