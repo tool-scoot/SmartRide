@@ -9,51 +9,54 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/smartride.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="saferide.js"></script>
 
-<body onload = "setUp()">
-    <div id = "ridescreen" style="overflow: auto; height: 900px">
-        <div class = "head">
-          <p class="title"> Ride </p>
-          <a href='index.html'><i id="close" class="fa fa-arrow-circle-left"></i></a>
-        </div>
-        <hr id="divisor">
-        
-        <!--<a href='/page2.html'><i id="settings2" class="glyphicon glyphicon-tasks"></i></a>
-        <a href='/page4.html'><i id="scroll_down" class="fa fa-chevron-circle-down"></i></a>-->
-        
+<body id = "ridescreen" onload="setUp()">
+
+  <!-- all body code goes in here, head code goes in existing header section -->
+  <!--<iframe id="googlemaps" src="https://www.google.com/maps/embed?pb=!1m24!1m8!1m3!1d21581.7776616572!2d-87.69326551159546!3d42.05448974302627!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x880fda991e0909af%3A0x84c2b7d444da08fd!2s560+Lincoln+Street%2C+Evanston%2C+IL!3m2!1d42.0612942!2d-87.6757566!4m5!1s0x880fd00adb51d875%3A0xd00006d0c19df955!2sFoster-Walker+Residential+Complex%2C+Evanston%2C+IL!3m2!1d42.0529122!2d-87.6786365!5e0!3m2!1sen!2sus!4v1558985067723!5m2!1sen!2sus" width="400" height="700" scrolling="no" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+  <iframe id="googlemaps" src="https://www.google.com/maps/embed?pb=!1m24!1m8!1m3!1d101365.41894219024!2d-87.69432395839056!3d42.051458731486626!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x880fda991e0909af%3A0x84c2b7d444da08fd!2s560+Lincoln+Street%2C+Evanston%2C+IL!3m2!1d42.0612942!2d-87.6757566!4m5!1s0x880fd00adb51d875%3A0xd00006d0c19df955!2sFoster-Walker+Residential+Complex%2C+Evanston%2C+IL!3m2!1d42.0529122!2d-87.6786365!5e0!3m2!1sen!2sus!4v1558988728080!5m2!1sen!2sus" width="400" height="700" scrolling="no" frameborder="0" style="border:0" allowfullscreen></iframe>
+      <!--<div id = "rideheader">-->
+        <a onclick="saveLastPage()" href='/page2.html'><i id="settings2" class="fa fa-cog"></i></a> <!-- this is the three bars icon for the options slide ba, we need to do an href-->
+        <a href='index.html'> <i id="home" class="fa fa-home"></i> </a>
+      <!--</div>-->
+      <!--I didn't see the point of this div so I commented it out for now-->
+
+      <div id = "rideicons">
+        <!--<div id = "ridetitle"> RIDE </div>-->
+        <br>
+        <br>
+        <br>
+        <br>
           <div class="transport" id = "option1">
             <p>Uber</p>
-            <article id="uberinfo" data-eta="15" data-price="50">
+            <article id="uberinfo" data-eta="15" data-price="5">
             </article>
-              <img class="logo" src="project_5_files/images/uber logo.png">
-          </div>
-
+              </div>
+          <hr id="break">
           <div class="transport" id = "option2">
               <p>Lyft</p>
-              <article id="lyftinfo" data-eta="25" data-price="40">
+              <article id="lyftinfo" data-eta="25" data-price="6">
                 </article>
-              <img class="logo" src="project_5_files/images/lyft logo.png">
+              
           </div>
-
+          <hr id="break">
           <div class="transport" id = "option3">
             <p>SafeRide</p>
             <article id="saferideinfo" data-eta="30" data-price="0">
                 </article>
-            <img class="logo" src="project_5_files/images/saferide  logo.jpg">
+            
           </div>
-
+          <hr id="break">
           <div class="transport" id = "option4">
               <p>CTA</p>
-              <article id="ctainfo" data-eta="5" data-price="20">
+              <article id="ctainfo" data-eta="5" data-price="2">
                   </article>
-              <img class="logo" src="project_5_files/images/cta logo.png">
+              
           </div>
-    
-      
-    </div>
-</body>
+        </div>
+
 <script>
+
   function setUp(){
     //set up the display order
     let lyfteta = document.getElementById("lyftinfo").getAttribute("data-eta");
@@ -77,19 +80,19 @@
         if (etas[i] == ubereta){
           document.getElementById("option"+(i+1)).innerHTML = 
           `<p id = "ridetitle"><a id = "travellink" href="">Uber</a></p>
-            <article id="uberinfo" data-eta="15" data-price="50">
+            <article id="uberinfo" data-eta="15" data-price="5">
             </article>
-            <a href = ""><img class="logo" src="images/uber logo.png"></a>
-              <p id = "rideinfo">ETA: 15 min || Price: $50.00</p>`;
+            
+              <p id = "rideinfo">ETA: 15 min || Price: $5.00</p>`;
           uberstoredin = i;
         }
         else if (etas[i] == lyfteta){
           document.getElementById("option"+(i+1)).innerHTML = 
               `<p id = "ridetitle"><a id = "travellink" href="">Lyft</a></p>
-              <article id="lyftinfo" data-eta="25" data-price="40">
+              <article id="lyftinfo" data-eta="25" data-price="6">
                 </article>
-                <a href = ""><img class="logo" src="images/lyft logo.png"></a>
-              <p id = "rideinfo">ETA: 25 min || Price: $40.00</p>`;
+               
+              <p id = "rideinfo">ETA: 25 min || Price: $6.00</p>`;
           lyftstoredin = i;
         }
         else if (etas[i] == sreta){
@@ -97,17 +100,17 @@
           `<p id = "ridetitle"><a id = "travellink" href="">SafeRide</a></p>
             <article id="saferideinfo" data-eta="30" data-price="0">
                 </article>
-                <a href = ""><img class="logo" src="images/saferide  logo.jpg"></a>
+                
             <p id = "rideinfo">ETA: 30 min || Price: $0.00</p>`;
           srstoredin = i;
         }
         else if (etas[i] == ctaeta){
           document.getElementById("option"+(i+1)).innerHTML =
           `<p id = "ridetitle"><a id = "travellink" href="">CTA</a></p>
-              <article id="ctainfo" data-eta="5" data-price="20">
+              <article id="ctainfo" data-eta="5" data-price="2">
                   </article>
-                  <a href = ""><img class="logo" src="images/cta logo.png"></a>
-              <p id = "rideinfo">ETA: 5 min || Price: $20.00</p>`;
+                  
+              <p id = "rideinfo">ETA: 5 min || Price: $2.00</p>`;
           ctastoredin = i;
         }
       }
@@ -120,19 +123,19 @@
         if (prices[i] == uberprice){
           document.getElementById("option"+(i+1)).innerHTML = 
           `<p><a id = "travellink" href="">Uber</a></p>
-            <article id="uberinfo" data-eta="15" data-price="50">
+            <article id="uberinfo" data-eta="15" data-price="5">
             </article>
-            <a href = ""><img class="logo" src="images/uber logo.png"></a>
-            <p id = "rideinfo">Price: $50.00 || ETA: 15 min</p>`;
+            
+            <p id = "rideinfo">Price: $5.00 || ETA: 15 min</p>`;
           uberstoredin = i;
         }
         else if (prices[i] == lyftprice){
           document.getElementById("option"+(i+1)).innerHTML = 
               `<p><a id = "travellink" href="">Lyft</a></p>
-              <article id="lyftinfo" data-eta="25" data-price="40">
+              <article id="lyftinfo" data-eta="25" data-price="4">
                 </article>
-                <a href = ""><img class="logo" src="images/lyft logo.png"></a>
-                <p id = "rideinfo">Price: $40.00 || ETA: 25 min</p>`;
+               
+                <p id = "rideinfo">Price: $6.00 || ETA: 25 min</p>`;
           lyftstoredin = i;
         }
         else if (prices[i] == srprice){
@@ -140,17 +143,17 @@
           `<p><a id = "travellink" href="">SafeRide</a></p>
             <article id="saferideinfo" data-eta="30" data-price="0">
                 </article>
-                <a href = ""><img class="logo" src="images/saferide  logo.jpg"></a>
+
                 <p id = "rideinfo">Price: $0.00 || ETA: 30 min</p>`;
           srstoredin = i;
         }
         else if (prices[i] == ctaprice){
           document.getElementById("option"+(i+1)).innerHTML =
           `<p><a id = "travellink" href="">CTA</a></p>
-              <article id="ctainfo" data-eta="5" data-price="20">
+              <article id="ctainfo" data-eta="5" data-price="2">
                   </article>
-            <a href = ""><img class="logo" src="images/cta logo.png"></a>
-            <p id = "rideinfo">Price: $20.00 || ETA: 5 min</p>`;
+                  
+            <p id = "rideinfo">Price: $2.00 || ETA: 5 min</p>`;
           ctastoredin = i;
         }
       }
@@ -168,5 +171,10 @@
       document.getElementById("option"+(ctastoredin+1)).style.display = "none";
   }
 
+  function saveLastPage(){
+          localStorage.setItem("cameFrom", "page3.html");
+  }
+
 </script>
+</body>
 </html>

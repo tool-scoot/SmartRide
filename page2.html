@@ -10,11 +10,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/smartride.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body onload = "loadChecked()">
       <div class="head">
         <p class="title">Settings</p>
-        <a href='index.html'><i id="close" class="fa fa-close"></i></a>
+        <a id="closelink" onclick="wheretoGo()" href='index.html'><i id="close" class="fa fa-close"></i></a>
       </div>
       <hr id = "divisor">
       <!--<p id = "time">00:00</p>
@@ -32,7 +33,7 @@
       <div id="display_options">
         <p>Display Order</p>
           <select id="select" name="display_order">
-            <option value="By Price">By Price</option>
+            <option value="By Price" selected>By Price</option>
             <option value="By ETA">By ETA</option>
           </select>
       </div>
@@ -67,6 +68,12 @@ function loadChecked() {
 
 for (let i = 1; i < 5; i++){
   console.log(localStorage.getItem('Transport'+i));
+}
+console.log(localStorage.getItem("cameFrom"));
+
+function wheretoGo(){
+  let pagetogoto = localStorage.getItem("cameFrom");
+  $("#closelink").attr("href", pagetogoto);
 }
   
 
