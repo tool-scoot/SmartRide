@@ -10,33 +10,390 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
-<body id = "screen" style="overflow: hidden">
+<!--<body id = "screen">
 
-    <!-- all body code goes in here, head code goes in existing header section -->
-    <!-- <img id="googlemaps" src="/images/map1.jpg"> still image for google maps -->
-    <!--embedded map --><iframe id = "googlemaps" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9439.856904980787!2d-87.67675634290022!3d42.05502653225484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1558984077572!5m2!1sen!2sus" width="400" height="670" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <!-- all body code goes in here, head code goes in existing header section
+    <!-- <img id="googlemaps" src="/images/map1.jpg"> still image for google maps
+    <!--embedded map <iframe id = "googlemaps" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9439.856904980787!2d-87.67675634290022!3d42.05502653225484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1558984077572!5m2!1sen!2sus" width="400" height="670" frameborder="0" style="border:0" allowfullscreen></iframe>
     <a onclick="saveLastPage()" href='page2.html'><i id="settings" class="fa fa-cog"></i></a>
     <form id = "fromto">
           <input type="text" id="from" placeholder = "From"> <br>
           <input type="text" id="to" placeholder = "To">
     </form>
     <a id = "gobutton" href='page3.html'> <button id = "go" onclick="goButton()">Go!</button> </a>
+   -->
 
+   <body id = "ridescreen" onload="pageLayout(), loadChecked()">
+
+         <iframe id="googlemaps" src="https://www.google.com/maps/embed?pb=!1m24!1m8!1m3!1d101365.41894219024!2d-87.69432395839056!3d42.051458731486626!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x880fda991e0909af%3A0x84c2b7d444da08fd!2s560+Lincoln+Street%2C+Evanston%2C+IL!3m2!1d42.0612942!2d-87.6757566!4m5!1s0x880fd00adb51d875%3A0xd00006d0c19df955!2sFoster-Walker+Residential+Complex%2C+Evanston%2C+IL!3m2!1d42.0529122!2d-87.6786365!5e0!3m2!1sen!2sus!4v1558988728080!5m2!1sen!2sus" width="400" height="700" scrolling="no" frameborder="0" style="border:0" allowfullscreen></iframe>
+               <a onclick="saveLastPage()" href='/page2.html'><i id="settings2" class="fa fa-cog"></i></a> <!-- this is the three bars icon for the options slide ba, we need to do an href-->
+               <a onclick="resetRS()" href='index.html'> <i id="home" class="fa fa-home"></i> </a>
+       
+             <div id = "rideicons">
+                 <i id="scrollindicator" class="fa fa-arrow-down"></i>
+               <br>
+               <br>
+               <br>
+               <br>
+                 <div class="transport" id = "option1">
+                   <p>Uber</p>
+                   <article id="uberinfo" data-eta="15" data-price="5">
+                   </article>
+                   <hr id="break">
+                 </div>
+                 
+                 <div class="transport" id = "option2">
+                     <p>Lyft</p>
+                     <article id="lyftinfo" data-eta="25" data-price="6">
+                       </article>
+                       <hr id="break">
+                 </div>
+                 
+                 <div class="transport" id = "option3">
+                   <p>SafeRide</p>
+                   <article id="saferideinfo" data-eta="30" data-price="0">
+                       </article>
+                       <hr id="break">
+                 </div>
+                 
+                 <div class="transport" id = "option4">
+                     <p>CTA</p>
+                     <article id="ctainfo" data-eta="5" data-price="2">
+                         </article>
+                         <hr id="break">
+                 </div>
+               </div>
     <script>
+       let rideSelected = false;
+       let settingsup = false;
+       if (localStorage.getItem("rideSelected") == "true")
+         rideSelected = true;
+      else if (localStorage.getItem("rideSelected") == "false")
+         rideSelected = false;
+
        function goButton(){
           let whereFrom = document.getElementById("from").value;
           let whereTo = document.getElementById("to").value;
           localStorage.setItem("from", whereFrom);
           localStorage.setItem("to", whereTo);
-          if (localStorage.getItem("from") == "" || localStorage.getItem("to") == ""){
-            $("#gobutton").attr("href", "index.html");
-            alert("Please enter the required information.");
+         if (localStorage.getItem("from") == "" && localStorage.getItem("to") == ""){
+            $("#gobutton").removeAttr("href");
+               $("#from").css("border-color", "red");
+               shake();
+         $("#gobutton").removeAttr("href");
+               $("#to").css("border-color", "red");
+               shake();
+         }
+         else if (localStorage.getItem("from") == ""){
+            $("#gobutton").removeAttr("href");
+            $("#from").css("border-color", "red");
+            shake();
           }
+         else if (localStorage.getItem("to") == ""){
+            $("#gobutton").removeAttr("href");
+            $("#to").css("border-color", "red");
+            shake();
+          }
+         else{
+            //$("#gobutton").attr("href", "index.html");
+            $("#from").css("border-color", "white");
+            $("#to").css("border-color", "white");
+            $("#from").css("border-width", "medium");
+            $("#to").css("border-witdth", "medium");
+            $("#gobutton").attr("href", "index.html");
+            rideSelected = true;
+            localStorage.setItem("rideSelected", "true");
+         }
           //plug whereFrom and whereTo into the google map widget
+
+
        } 
        function saveLastPage(){
           localStorage.setItem("cameFrom", "index.html");
        }
+
+       function shake(){
+         field = document.getElementById("fromto");
+         setTimeout(function(){field.style.left = "45px";}, 0);
+         setTimeout(function(){field.style.left = "40px";}, 3);
+         setTimeout(function(){field.style.left = "35px";}, 6);
+         setTimeout(function(){field.style.left = "40px";}, 9);
+         setTimeout(function(){field.style.left = "45px";}, 12);
+         setTimeout(function(){field.style.left = "50px";}, 15);
+         setTimeout(function(){field.style.left = "55px";}, 18);
+         setTimeout(function(){field.style.left = "60px";}, 21);
+         setTimeout(function(){field.style.left = "65px";}, 24);
+         setTimeout(function(){field.style.left = "60px";}, 27);
+         setTimeout(function(){field.style.left = "55px";}, 30);
+         setTimeout(function(){field.style.left = "50px";}, 33);
+         console.log("shaken");
+       }
+
+       function setUp(){
+    //set up the display order
+    let lyfteta = document.getElementById("lyftinfo").getAttribute("data-eta");
+    let lyftprice = document.getElementById("lyftinfo").getAttribute("data-price");
+    let ubereta = document.getElementById("uberinfo").getAttribute("data-eta");
+    let uberprice = document.getElementById("uberinfo").getAttribute("data-price");
+    let sreta = document.getElementById("saferideinfo").getAttribute("data-eta");
+    let srprice = document.getElementById("saferideinfo").getAttribute("data-price");
+    let ctaeta = document.getElementById("ctainfo").getAttribute("data-eta");
+    let ctaprice = document.getElementById("ctainfo").getAttribute("data-price");
+    let uberstoredin = 0;
+    let lyftstoredin = 0;
+    let srstoredin = 0;
+    let ctastoredin = 0;
+    let sortBy = localStorage.getItem('sortBy');
+    if (sortBy == "By ETA"){
+      let etas = [lyfteta, ubereta, sreta, ctaeta];
+      etas.sort(function(a, b){return a-b});
+      console.log(etas);
+      for (let i = 0; i < etas.length; i++){
+        if (etas[i] == ubereta){
+          document.getElementById("option"+(i+1)).innerHTML = 
+          `<p id = "ridetitle"><a id = "travellink" href="">Uber</a></p>
+            <article id="uberinfo" data-eta="15" data-price="5">
+            </article>
+            
+              <p id = "rideinfo">ETA: 15 min || Price: $5.00</p>`;
+          uberstoredin = i;
+        }
+        else if (etas[i] == lyfteta){
+          document.getElementById("option"+(i+1)).innerHTML = 
+              `<p id = "ridetitle"><a id = "travellink" href="">Lyft</a></p>
+              <article id="lyftinfo" data-eta="25" data-price="6">
+                </article>
+               
+              <p id = "rideinfo">ETA: 25 min || Price: $6.00</p>`;
+          lyftstoredin = i;
+        }
+        else if (etas[i] == sreta){
+          document.getElementById("option"+(i+1)).innerHTML =
+          `<p id = "ridetitle"><a id = "travellink" href="">SafeRide</a></p>
+            <article id="saferideinfo" data-eta="30" data-price="0">
+                </article>
+                
+            <p id = "rideinfo">ETA: 30 min || Price: $0.00</p>`;
+          srstoredin = i;
+        }
+        else if (etas[i] == ctaeta){
+          document.getElementById("option"+(i+1)).innerHTML =
+          `<p id = "ridetitle"><a id = "travellink" href="">CTA</a></p>
+              <article id="ctainfo" data-eta="5" data-price="2">
+                  </article>
+                  
+              <p id = "rideinfo">ETA: 5 min || Price: $2.00</p>`;
+          ctastoredin = i;
+        }
+      }
+    }
+    else{
+      let prices = [lyftprice, uberprice, srprice, ctaprice];
+      prices.sort(function(a, b){return a-b});
+      console.log(prices);
+      for (let i = 0; i < prices.length; i++){
+        if (prices[i] == uberprice){
+          document.getElementById("option"+(i+1)).innerHTML = 
+          `<p><a id = "travellink" href="">Uber</a></p>
+            <article id="uberinfo" data-eta="15" data-price="5">
+            </article>
+            
+            <p id = "rideinfo">Price: $5.00 || ETA: 15 min</p>`;
+          uberstoredin = i;
+        }
+        else if (prices[i] == lyftprice){
+          document.getElementById("option"+(i+1)).innerHTML = 
+              `<p><a id = "travellink" href="">Lyft</a></p>
+              <article id="lyftinfo" data-eta="25" data-price="4">
+                </article>
+               
+                <p id = "rideinfo">Price: $6.00 || ETA: 25 min</p>`;
+          lyftstoredin = i;
+        }
+        else if (prices[i] == srprice){
+          document.getElementById("option"+(i+1)).innerHTML =
+          `<p><a id = "travellink" href="">SafeRide</a></p>
+            <article id="saferideinfo" data-eta="30" data-price="0">
+                </article>
+
+                <p id = "rideinfo">Price: $0.00 || ETA: 30 min</p>`;
+          srstoredin = i;
+        }
+        else if (prices[i] == ctaprice){
+          document.getElementById("option"+(i+1)).innerHTML =
+          `<p><a id = "travellink" href="">CTA</a></p>
+              <article id="ctainfo" data-eta="5" data-price="2">
+                  </article>
+                  
+            <p id = "rideinfo">Price: $2.00 || ETA: 5 min</p>`;
+          ctastoredin = i;
+        }
+      }
+    }
+
+    //set up the visibility
+    if (!(JSON.parse(localStorage.getItem('Transport1'))))
+      document.getElementById("option"+(uberstoredin+1)).style.display = "none";
+    if (!(JSON.parse(localStorage.getItem('Transport2'))))
+      document.getElementById("option"+(lyftstoredin+1)).style.display = "none";
+    if (!(JSON.parse(localStorage.getItem('Transport3'))))
+      document.getElementById("option"+(srstoredin+1)).style.display = "none";
+    if (!(JSON.parse(localStorage.getItem('Transport4'))))
+      document.getElementById("option"+(ctastoredin+1)).style.display = "none";
+  }
+
+  function resetRS(){
+     rideSelected = false;
+     localStorage.setItem("rideSelected", "false");
+  }
+
+  function pageLayout(){
+     if (!rideSelected){
+         document.getElementById("ridescreen").innerHTML = `
+               <div id="settingshover">
+                  <div id="settings_text">
+                     <p id="display">Displayed</p>
+                     <div class="transport_options">
+                        <input type="checkbox" checked="true" id="Transport1" value="Uber"> Uber<br>
+                        <input type="checkbox" checked="true" id="Transport2" value="Lyft"> Lyft<br>
+                        <input type="checkbox" checked="true" id="Transport3" value="SafeRide"> SafeRide<br>
+                        <input type="checkbox" checked="true" id="Transport4" value="CTA"> CTA<br>
+                     </div>
+                     <div id="display_options">
+                     <p id="order">Display Order</p>
+                        <select id="select" name="display_order">
+                           <option value="By Price" selected="selected">By Price</option>
+                           <option value="By ETA">By ETA</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+         <iframe id = "googlemaps" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9439.856904980787!2d-87.67675634290022!3d42.05502653225484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1558984077572!5m2!1sen!2sus" width="400" height="670" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <a onclick="doSettings()"><i id="settings" class="fa fa-cog"></i></a>
+    <form id = "fromto">
+          <input type="text" id="from" placeholder = "From"> <br>
+          <input type="text" id="to" placeholder = "To">
+    </form>
+    <a id = "gobutton" href='index.html'> <button id = "go" onclick="goButton()">Go!</button> </a>`
+      $("html").css("overflow", "hidden");
+      $("html").css("height", "100%");
+      $("body").css("overflow", "hidden");
+      $("body").css("height", "100%");
+      }
+   else{
+      document.getElementById("ridescreen").innerHTML = `
+               <div id = "settingshover">
+                  <div id="settings_text">
+                     <p id="display">Displayed</p>
+                     <div class="transport_options">
+                        <input type="checkbox" checked="true" id="Transport1" value="Uber"> Uber<br>
+                        <input type="checkbox" checked="true" id="Transport2" value="Lyft"> Lyft<br>
+                        <input type="checkbox" checked="true" id="Transport3" value="SafeRide"> SafeRide<br>
+                        <input type="checkbox" checked="true" id="Transport4" value="CTA"> CTA<br>
+                     </div>
+                     <div id="display_options">
+                     <p id="order">Display Order</p>
+                        <select id="select" name="display_order">
+                           <option value="By Price" selected="selected">By Price</option>
+                           <option value="By ETA">By ETA</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+            <iframe id="googlemaps" src="https://www.google.com/maps/embed?pb=!1m24!1m8!1m3!1d101365.41894219024!2d-87.69432395839056!3d42.051458731486626!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x880fda991e0909af%3A0x84c2b7d444da08fd!2s560+Lincoln+Street%2C+Evanston%2C+IL!3m2!1d42.0612942!2d-87.6757566!4m5!1s0x880fd00adb51d875%3A0xd00006d0c19df955!2sFoster-Walker+Residential+Complex%2C+Evanston%2C+IL!3m2!1d42.0529122!2d-87.6786365!5e0!3m2!1sen!2sus!4v1558988728080!5m2!1sen!2sus" width="400" height="700" scrolling="no" frameborder="0" style="border:0" allowfullscreen></iframe>
+               <a onclick="doSettings()"><i id="settings2" class="fa fa-cog"></i></a> <!-- this is the three bars icon for the options slide ba, we need to do an href-->
+               <a onclick="resetRS()" href='index.html'> <i id="home" class="fa fa-home"></i> </a>
+       
+             <div id = "rideicons">
+                 <i id="scrollindicator" class="fa fa-arrow-down"></i>
+               <br>
+               <br>
+               <br>
+               <br>
+                 <div class="transport" id = "option1">
+                   <p>Uber</p>
+                   <article id="uberinfo" data-eta="15" data-price="5">
+                   </article>
+                   <hr id="break">
+                 </div>
+                 
+                 <div class="transport" id = "option2">
+                     <p>Lyft</p>
+                     <article id="lyftinfo" data-eta="25" data-price="6">
+                       </article>
+                       <hr id="break">
+                 </div>
+                 
+                 <div class="transport" id = "option3">
+                   <p>SafeRide</p>
+                   <article id="saferideinfo" data-eta="30" data-price="0">
+                       </article>
+                       <hr id="break">
+                 </div>
+                 
+                 <div class="transport" id = "option4">
+                     <p>CTA</p>
+                     <article id="ctainfo" data-eta="5" data-price="2">
+                         </article>
+                         <hr id="break">
+                 </div>
+               </div>`
+               setUp();
+            $("html").css("overflow", "visible");
+            $("html").css("x-overflow", "hidden");
+            $("html").css("height", "auto");
+            $("body").css("overflow", "visible");
+            $("body").css("x-overflow", "hidden");
+            $("body").css("height", "auto");
+   }
+   $("#settingshover").css("display", "none");
+   settingsup = false;
+  }
+
+  function updateChecked() {
+      let checkbox = [];
+      for (let i = 1; i < 5; i++){
+         checkbox[i-1] = document.getElementById('Transport'+i);
+         localStorage.setItem('Transport'+i, checkbox[i-1].checked);
+         console.log(JSON.parse(localStorage.getItem('Transport'+i)));
+      }
+      let e = document.getElementById("select");
+      let theString = e.options[e.selectedIndex].value;
+      console.log(theString);
+      localStorage.setItem('sortBy', theString);
+      localStorage.setItem("rideSelected", "false");
+   }
+
+function loadChecked() {
+  let checked = [];
+  for (let i = 1; i < 5; i++){
+    checked[i-1] = JSON.parse(localStorage.getItem('Transport'+i));
+    document.getElementById('Transport'+i).checked = checked[i-1];
+  }
+  let e = document.getElementById("select");
+  e.value = localStorage.getItem('sortBy');
+}
+
+for (let i = 1; i < 5; i++){
+  console.log(localStorage.getItem('Transport'+i));
+}
+console.log(localStorage.getItem("cameFrom"));
+
+function doSettings(){
+   if (settingsup == false){
+      $("#settingshover").css("display", "inline");
+      loadChecked();
+      settingsup = true;
+      console.log(settingsup);
+   }
+   else{
+      $("#settingshover").css("display", "none");
+      updateChecked();
+      settingsup = false;
+      console.log(settingsup);
+   }
+}
+
     </script>
 </body>
 </html>
